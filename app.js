@@ -25,6 +25,11 @@ const techniques = {
       { name: 'Expirez', duration: 4 },
       { name: 'Pause', duration: 4 }
     ]
+  },
+  custom: {
+    name: 'Personnalisé',
+    get description() { return buildCustomDescription(); },
+    get phases() { return buildCustomPhases(); }
   }
 };
 
@@ -38,10 +43,18 @@ const techniqueBtns = document.querySelectorAll('.technique-btn');
 const voiceBtn = document.getElementById('voiceBtn');
 const voiceIcon = document.getElementById('voiceIcon');
 const voiceMutedIcon = document.getElementById('voiceMutedIcon');
+const customPanel = document.getElementById('customPanel');
+const customInspire = document.getElementById('customInspire');
+const customRetention = document.getElementById('customRetention');
+const customExpire = document.getElementById('customExpire');
+const customInspireValue = document.getElementById('customInspireValue');
+const customRetentionValue = document.getElementById('customRetentionValue');
+const customExpireValue = document.getElementById('customExpireValue');
 
 const sounds = {
-  Inspirez: new Audio('sounds/Inspirez.m4a'),
-  Expirez: new Audio('sounds/Expirez.m4a')
+  Inspirez: new Audio('sounds/Inspirez.wav'),
+  Expirez: new Audio('sounds/Expirez.wav'),
+  Retenez: new Audio('sounds/Retenez.wav')
 };
 
 let currentTechnique = 'coherence';
@@ -49,6 +62,30 @@ let running = false;
 let intervalId = null;
 let cycleCount = 0;
 let voiceEnabled = false;
+
+function buildCustomPhases() {
+  const phases = [{ name: 'Inspirez', duration: parseInt(customInspire.value) }];
+  const ret = parseInt(customRetention.value);
+  if (ret > 0) phases.push({ name: 'Retenez', duration: ret });
+  phases.push({ name: 'Expirez', duration: parseInt(customExpire.value) });
+  return phases;
+}
+
+function buildCustomDescription() {
+  const ins = customInspire.value;
+  const ret = customRetention.value;
+  const exp = customExpire.value;
+  let desc = `${ins}s inspiration`;
+  if (parseInt(ret) > 0) desc += `, ${ret}s rétention`;
+  desc += `, ${exp}s expiration`;
+  return desc;
+}
+
+function updateCustomDescription() {
+  if (currentTechnique === 'custom') {
+    techniqueDescription.textContent = buildCustomDescription();
+  }
+}
 
 const MIN_SCALE = 0.6;
 const MAX_SCALE = 1.8;
@@ -169,10 +206,21 @@ techniqueBtns.forEach(btn => {
     techniqueBtns.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     techniqueDescription.textContent = techniques[technique].description;
+    customPanel.classList.toggle('visible', technique === 'custom');
 
     if (running) {
       stop();
     }
+  });
+});
+
+[customInspire, customRetention, customExpire].forEach(slider => {
+  slider.addEventListener('input', () => {
+    customInspireValue.textContent = customInspire.value + 's';
+    customRetentionValue.textContent = customRetention.value + 's';
+    customExpireValue.textContent = customExpire.value + 's';
+    updateCustomDescription();
+    if (running) stop();
   });
 });
 

@@ -14,10 +14,29 @@
       <button class="technique-btn active" data-technique="coherence">Coh&eacute;rence cardiaque</button>
       <button class="technique-btn" data-technique="relaxation">Relaxation 4-7-8</button>
       <button class="technique-btn" data-technique="box">Respiration carr&eacute;e</button>
+      <button class="technique-btn" data-technique="custom">Personnalis&eacute;</button>
     </div>
 
     <div class="technique-description" id="techniqueDescription">
       6 respirations par minute &mdash; 5s inspiration, 5s expiration
+    </div>
+
+    <div class="custom-panel" id="customPanel">
+      <div class="slider-group">
+        <label for="customInspire">Inspiration</label>
+        <input type="range" id="customInspire" min="1" max="15" value="4" step="1">
+        <span class="slider-value" id="customInspireValue">4s</span>
+      </div>
+      <div class="slider-group">
+        <label for="customRetention">R&eacute;tention</label>
+        <input type="range" id="customRetention" min="0" max="15" value="0" step="1">
+        <span class="slider-value" id="customRetentionValue">0s</span>
+      </div>
+      <div class="slider-group">
+        <label for="customExpire">Expiration</label>
+        <input type="range" id="customExpire" min="1" max="15" value="4" step="1">
+        <span class="slider-value" id="customExpireValue">4s</span>
+      </div>
     </div>
 
     <div class="circle-container">
