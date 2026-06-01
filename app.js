@@ -57,6 +57,11 @@ const sounds = {
   Retenez: new Audio('sounds/Retenez.wav')
 };
 
+Object.values(sounds).forEach(audio => {
+  audio.preload = 'auto';
+  audio.load();
+});
+
 let currentTechnique = 'coherence';
 let running = false;
 let intervalId = null;
