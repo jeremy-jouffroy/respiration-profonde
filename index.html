@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Respiration Profonde</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <h1 class="title">Respiration Profonde</h1>
+
+    <div class="technique-selector">
+      <button class="technique-btn active" data-technique="coherence">Coh&eacute;rence cardiaque</button>
+      <button class="technique-btn" data-technique="relaxation">Relaxation 4-7-8</button>
+      <button class="technique-btn" data-technique="box">Respiration carr&eacute;e</button>
+    </div>
+
+    <div class="technique-description" id="techniqueDescription">
+      6 respirations par minute &mdash; 5s inspiration, 5s expiration
+    </div>
+
+    <div class="circle-container">
+      <div class="circle" id="circle">
+        <span class="phase-label" id="phaseLabel">Pr&ecirc;t</span>
+        <span class="timer" id="timer"></span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="control-btn" id="startBtn">Commencer</button>
+      <button class="voice-btn" id="voiceBtn" aria-label="Activer la voix">
+        <svg class="voice-icon" id="voiceIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+          <path class="voice-waves" d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.08"/>
+        </svg>
+        <svg class="voice-icon muted-icon" id="voiceMutedIcon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+          <line x1="23" y1="9" x2="17" y2="15"/>
+          <line x1="17" y1="9" x2="23" y2="15"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cycle-counter" id="cycleCounter"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
